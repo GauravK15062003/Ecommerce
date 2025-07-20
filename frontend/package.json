@@ -17,6 +17,7 @@
     "axios": "^1.10.0",
     "chart.js": "^4.5.0",
     "country-state-city": "^3.2.1",
+    "dotenv": "^17.2.0",
     "overlay-navbar": "^1.2.3",
     "react": "^18.2.0",
     "react-alert": "^7.0.3",
