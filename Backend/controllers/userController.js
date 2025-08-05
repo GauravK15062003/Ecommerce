@@ -24,7 +24,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
-
+  
   const message = `Welcome to Ecommerce, ${user.name}!\n\nYour account has been successfully created. You can now log in and start shopping.\n\nThank you for joining us!`;
 
   try {
@@ -47,8 +47,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     });
   }
   sendToken(user, 201, res); //Providing JWT Token
-  //
-});
+  // 
+  });
 
 //2.Login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -108,9 +108,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   //   "host"
   // )}/api/v1/password/reset/${resetToken}`;
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl}\n\nIf you have not requested this email then please ignore it.`;
 
@@ -347,10 +346,10 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   }
 
   const imageId = user?.avatar?.public_id;
-  // console.log("Deleting image:", user?.avatar);
-  if (imageId) {
-    await cloudinary.v2.uploader.destroy(imageId);
-  }
+    // console.log("Deleting image:", user?.avatar);
+    if (imageId) {
+      await cloudinary.v2.uploader.destroy(imageId);
+    }
 
   await user.deleteOne();
 
