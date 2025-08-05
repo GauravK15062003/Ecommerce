@@ -130,7 +130,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json", withCredentials: true } };
+    const config = { headers: { "Content-Type": "application/json"}, withCredentials: true  };
 
     const { data } = await axios.put(
       `https://ecommerce-1-mh1v.onrender.com/api/v1/password/update`,

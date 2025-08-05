@@ -6,6 +6,20 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 
+// Body parser
+
+
+// ✅ Add this CORS middleware here
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // your frontend
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+
+
 // Add this CORS setup
 app.use(cors({
   origin: "http://localhost:3000", // allow local frontend
