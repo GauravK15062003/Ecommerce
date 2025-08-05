@@ -8,7 +8,7 @@ const cors = require("cors");
 
 // Add this CORS setup
 app.use(cors({
-  origin: "http://localhost:3000", // allow local frontend
+  origin: "http://localhost:3001", // allow local frontend
   credentials: true               // allow cookies if you're using them
 }));
 
