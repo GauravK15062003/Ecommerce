@@ -56,9 +56,10 @@ const Payment = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "https://ecommerce-1-mh1v.onrender.com/api/v1/payment/process",
         paymentData,
         config
       );

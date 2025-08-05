@@ -30,7 +30,9 @@ const UpdateProfile = ({ history }) => {
     
     myForm.set("name", name);
     myForm.set("email", email);
-    myForm.set("avatar", avatar);
+    if(avatar) {
+      myForm.set("avatar", avatar);
+    }
     console.log(name);
     console.log(email);
     dispatch(updateProfile(myForm));

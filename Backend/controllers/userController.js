@@ -212,11 +212,22 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   // console.log("BODY", req.body);
   // console.log("FILE", req.file);
-  const newUserDetails = {
-    name: req.body.name,
-    email: req.body.email,
-    //avatar
-  };
+ const newUserDetails = {
+  name: req.body.name,
+  email: req.body.email,
+};
+
+// If no file was uploaded, skip Cloudinary completely
+if (!req.file) {
+  await User.findByIdAndUpdate(req.user.id, newUserDetails, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  return res.status(200).json({ success: true });
+}
+
 
   const avatar = req.file;
 

@@ -1,10 +1,6 @@
 import React from "react";
 import Header from "./component/layout/Header/Header";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import webfont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
 import Home from "./component/Home/Home";
@@ -51,12 +47,13 @@ const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
 
-  const getStripeApiKey = async () => {
-    const { data } = await axios.get("/api/v1/stripeapikey");
-    setStripeApiKey(data.stripeApiKey);
-  };
-
   useEffect(() => {
+    const getStripeApiKey = async () => {
+      const { data } = await axios.get(
+        "https://ecommerce-1-mh1v.onrender.com/api/v1/stripeapikey", { withCredentials: true }
+      );
+      setStripeApiKey(data.stripeApiKey);
+    };
     webfont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
@@ -190,7 +187,7 @@ const App = () => {
           path="/admin/product"
           element={
             <ProtectedRoute isAdmin={true}>
-              <NewProduct/>
+              <NewProduct />
             </ProtectedRoute>
           }
         />
@@ -200,7 +197,7 @@ const App = () => {
           path="/admin/product/:id"
           element={
             <ProtectedRoute isAdmin={true}>
-              <UpdateProduct/>
+              <UpdateProduct />
             </ProtectedRoute>
           }
         />
@@ -209,7 +206,7 @@ const App = () => {
           path="/admin/orders"
           element={
             <ProtectedRoute isAdmin={true}>
-              <OrderList/>
+              <OrderList />
             </ProtectedRoute>
           }
         />
@@ -218,7 +215,7 @@ const App = () => {
           path="/admin/order/:id"
           element={
             <ProtectedRoute isAdmin={true}>
-              <ProcessOrder/>
+              <ProcessOrder />
             </ProtectedRoute>
           }
         />
@@ -227,7 +224,7 @@ const App = () => {
           path="/admin/users"
           element={
             <ProtectedRoute isAdmin={true}>
-              <UsersList/>
+              <UsersList />
             </ProtectedRoute>
           }
         />
@@ -236,7 +233,7 @@ const App = () => {
           path="/admin/user/:id"
           element={
             <ProtectedRoute isAdmin={true}>
-              <UpdateUser/>
+              <UpdateUser />
             </ProtectedRoute>
           }
         />
@@ -245,11 +242,10 @@ const App = () => {
           path="/admin/reviews"
           element={
             <ProtectedRoute isAdmin={true}>
-              <ProductReviews/>
+              <ProductReviews />
             </ProtectedRoute>
           }
         />
-
 
         <Route exact path="/about" Component={About} />
         <Route exact path="/contact" Component={Contact} />
