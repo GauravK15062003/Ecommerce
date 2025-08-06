@@ -10,13 +10,13 @@ const cors = require("cors");
 
 
 // ✅ Add this CORS middleware here
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://gaurav02ecommerce.netlify.app/"); // your frontend
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "https://gaurav02ecommerce.netlify.app/"); // your frontend
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   next();
+// });
 
 
 
