@@ -22,7 +22,7 @@ const cors = require("cors");
 
 // Add this CORS setup
 app.use(cors({
-  origin: "https://gaurav121ecommerce.netlify.app", // allow local frontend
+  origin: "https://gaurav15ecommerce.netlify.app", // allow local frontend
   credentials: true               // allow cookies if you're using them
 }));
 
