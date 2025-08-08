@@ -5,24 +5,34 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
+const path = require("path");
 
 //1.Register new User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  const { name, email, password } = req.body;
+
+  let avatar = {
+    public_id: null,
+    url: null,
+  }
+
+  if(req.body.avatar) {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "Ecommerce_Avatars",
     width: 150,
     crop: "scale",
   });
-  const { name, email, password } = req.body;
+  avatar = {
+    public_id: myCloud.public_id,
+    url: myCloud.secure_url,
+  }
+}
 
   const user = await User.create({
     name,
     email,
     password, // Hashed Password is stored in DB which done in user model
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
+    avatar
   });
   
   const message = `Welcome to Ecommerce, ${user.name}!\n\nYour account has been successfully created. You can now log in and start shopping.\n\nThank you for joining us!`;
@@ -78,10 +88,13 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
 //3.Logout User
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
-  res.cookie("token", null, {
+  res.clearCookie("token", {
     //Token ko null kr do
     expires: new Date(Date.now()),
     httpOnly: true,
+    secure: true,
+    sameSite: "None",
+    path: "/",
   });
 
   res.status(200).json({
@@ -108,7 +121,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   //   "host"
   // )}/api/v1/password/reset/${resetToken}`;
 
-  const resetPasswordUrl = `https://gaurav111ecommerce.netlify.app/password/reset/${resetToken}`;
+  const resetPasswordUrl = `https://gaurav121ecommerce.netlify.app/password/reset/${resetToken}`;
 
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl}\n\nIf you have not requested this email then please ignore it.`;

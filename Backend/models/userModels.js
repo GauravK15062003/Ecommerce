@@ -27,10 +27,12 @@ const userSchema = new mongoose.Schema({
     public_id: {
       //from Cloudinary
       type: String,
+      default: null,
       // required: true,
     },
     url: {
       type: String,
+      default: "https://res.cloudinary.com/dz1qj3k2h/image/upload/v1698851234/Profile.png",
       // required: true,
 
     },

@@ -34,7 +34,7 @@
 
 @media screen and (max-width: 600px) {
   .CartItemCard {
-    padding: 3vmax;
+    padding: 1vmax;
     height: 25vmax;
   }
   .CartItemCard > img {

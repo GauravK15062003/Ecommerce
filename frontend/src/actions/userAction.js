@@ -101,6 +101,12 @@ export const logout = () => async (dispatch) => {
   try {
     await axios.get(`https://ecommerce-1-mh1v.onrender.com/api/v1/logout`,  { withCredentials: true },);
 
+    localStorage.clear();
+
+    // Clear user data from the Redux store
+    sessionStorage.clear();
+    delete axios.defaults.headers.common["Authorization"];
+
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });

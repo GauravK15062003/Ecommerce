@@ -50,7 +50,10 @@ const LoginSignUp = () => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
-    myForm.set("avatar", avatar);
+    // myForm.set("avatar", avatar);
+     if(avatar) {
+      myForm.set("avatar", avatar);
+    }
 
     // console.log("userData entries:");
     // for (let [key, value] of myForm.entries()) {
